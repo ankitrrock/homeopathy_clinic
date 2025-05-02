@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ clinic.name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body { scroll-behavior: smooth; }
+        section { padding: 60px 0; }
+        .navbar-brand { font-weight: bold; }
+        .nav-link { margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+<!-- Header + Nav -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#home">{{ clinic.name }}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#departments">Departments</a></li>
+                <li class="nav-item"><a class="nav-link" href="#doctors">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link" href="#appointment">Appointment</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- About Section -->
+<section id="about" class="container mt-5 pt-5">
+    <h2>About Us</h2>
+    <p>{{ clinic.about }}</p>
+</section>
+
+<!-- Departments -->
+<section id="departments" class="bg-light container">
+    <h2>Departments</h2>
+    <div class="row">
+        {% for dept in departments %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{{ dept.image.url }}" class="card-img-top">
+                <div class="card-body">
+                    <h5>{{ dept.name }}</h5>
+                    <p>{{ dept.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Doctors -->
+<section id="doctors" class="container">
+    <h2>Doctors</h2>
+    <div class="row">
+        {% for doc in doctors %}
+        <div class="col-md-3 text-center">
+            <img src="{{ doc.image.url }}" class="img-fluid rounded-circle mb-2" style="height:120px;">
+            <h5>{{ doc.name }}</h5>
+            <p>{{ doc.specialty }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Appointment -->
+<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">
+    Book Appointment
+  </a>
+
+<!-- Contact -->
+<section id="contact" class="container">
+    <h2>Contact</h2>
+    <p><strong>Phone:</strong> {{ clinic.phone }}</p>
+    <p><strong>Email:</strong> {{ clinic.email }}</p>
+    <p><strong>Address:</strong> {{ clinic.address }}</p>
+    <iframe src="https://www.google.com/maps?q={{ clinic.address|urlencode }}&output=embed"
+        width="100%" height="300" frameborder="0" style="border:0;"></iframe>
+</section>
+
+<!-- WhatsApp Chat Button -->
+<a href="https://wa.me/919876543210" class="d-inline-block" target="_blank" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 999;
+    text-decoration: none;">💬</a>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+    &copy; {{ clinic.name }} | {{ clinic.email }} | {{ clinic.phone }}
+</footer>
+
+<!-- JS -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+
+
+
+<!-- Appointment Modal -->
+<div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form method="post">
+          {% csrf_token %}
+          <div class="modal-header">
+            <h5 class="modal-title" id="appointmentModalLabel">Book an Appointment</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {{ form.as_p }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

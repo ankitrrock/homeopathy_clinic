@@ -1,0 +1,36 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.py[cod]
+*$py.class
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+*.log
+
+# Environment
+env/
+env*/         # covers folders like envclinik, env_dev etc.
+.venv/
+.venv*/
+envclinik/
+envclinik*/ 
+
+# VSCode and PyCharm
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+*.swp
+*.swo
+
+# Render build cache (optional)
+build/
