@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3a483sk#2ml@=jfjwx^_dcnj@(l5$9$jctlv8$ho)^dqyn$366
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['core.onrender.com']
+ALLOWED_HOSTS = ['homeopathy-clinic.onrender.com', '127.0.0.1', 'localhost']
 # ALLOWED_HOSTS = ['*']
 
 # Application definition
