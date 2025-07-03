@@ -30,6 +30,10 @@ ALLOWED_HOSTS = ['homeopathy-clinic.onrender.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
